@@ -6,11 +6,14 @@ interface Props {
     handleAdd: (e:React.FormEvent) => void;
 }
 const InputField:React.FC<Props> = ({setTodo,handleAdd}) => {
-  const inputRef =useRef(null)
+  const inputRef =useRef<HTMLInputElement>(null)
   return (
-    <form className='form'>
+    <form onSubmit={(e)=>{
+      handleAdd(e)
+      inputRef.current?.blur()
+    }} className='form'>
         <input ref={inputRef} onChange={(e)=> setTodo(e.target.value)} type='input' placeholder='Enter task'/>
-        <button type='submit' onClick={handleAdd}>GO</button>
+        <button type='submit' >GO</button>
     </form>
   )
 }
