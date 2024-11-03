@@ -10,3 +10,9 @@ type Actions =
 | {type:'done'; payload:number}
 
 const Todoreducer = (state:Todo[],action:Actions) =>{}
+
+export interface User {
+    name:string;
+    age:string;
+    date:number
+}

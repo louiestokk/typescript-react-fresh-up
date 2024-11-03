@@ -3,16 +3,17 @@ import { Todo } from '../models'
 import {AiFillEdit,AiFillDelete} from 'react-icons/ai'
 import {MdDone} from 'react-icons/md'
 import { useAppSelector } from '../redux/hooks'
+import { Box, Typography } from '@mui/material'
 interface Props {
     todos:Todo[];
     setlistTodos: React.Dispatch<React.SetStateAction<Todo[]>>;
-    todo:string
+    todo:string;
 }
 
 const ListOfTodos:React.FC<Props> = ({todos,setlistTodos,todo}) => {
     const [edit, setEdit] = useState<boolean>(false)
     const [editTodo, seteditTodo] = useState<string>('edit text by typing')
-    const uppgifter = useAppSelector((state)=> state.task)
+    const {task} = useAppSelector((state)=> state.task)
 
     const handleDone = (id:number) => {
         setlistTodos(
@@ -35,10 +36,17 @@ const ListOfTodos:React.FC<Props> = ({todos,setlistTodos,todo}) => {
           todos.map((todo) => (todo.id === id ? { ...todo, todo: editTodo } : todo))
         );
     }
-    console.log(uppgifter)
+ console.log(task)
   return (
     <div style={{marginTop:'25px'}}>
-        {todos.map((el,i)=>(
+        {task?.length>0 && <div>
+            {task.map((el,i)=>(
+               <Box key={i}>
+                <Typography>{el}</Typography>
+               </Box> 
+            ))}
+            </div>}
+        {/* {todos.map((el,i)=>(
             <div key={i} style={{display:'flex',alignItems:'center',width:'300px',border:'2px solid black',justifyContent:'space-between'}}>
           {edit? <input type='text' placeholder='text' onChange={(e)=>handleChange(e,el.id)}/>:<p>{el.todo}</p>}
                 <article style={{marginRight:'1rem'}} onClick={(e)=> handleEdit(el.id,e)}>
@@ -53,7 +61,8 @@ const ListOfTodos:React.FC<Props> = ({todos,setlistTodos,todo}) => {
                     </span>
                 </article>
             </div>
-        ))}
+        ))} */}
+
     </div>
   )
 }

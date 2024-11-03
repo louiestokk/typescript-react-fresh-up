@@ -3,11 +3,12 @@ import './App.css';
 import InputField from './components/InputField';
 import { Todo } from './models';
 import ListOfTodos from './components/ListOfTodos';
+import { useAppSelector } from './redux/hooks';
 
 const App:React.FC =()=> {
   const [todo, setTodo] = useState<string>("")
 const [listTodos, setlistTodos] = useState<Todo[]>([])
-
+const {task} = useAppSelector((state)=> state.task)
 const handleAdd =(e: React.FormEvent)=>{
   e.preventDefault()
   if(todo){
