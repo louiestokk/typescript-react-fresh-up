@@ -2,6 +2,7 @@ import React,{useState} from 'react'
 import { Todo } from '../models'
 import {AiFillEdit,AiFillDelete} from 'react-icons/ai'
 import {MdDone} from 'react-icons/md'
+import { useAppSelector } from '../redux/hooks'
 interface Props {
     todos:Todo[];
     setlistTodos: React.Dispatch<React.SetStateAction<Todo[]>>;
@@ -11,6 +12,7 @@ interface Props {
 const ListOfTodos:React.FC<Props> = ({todos,setlistTodos,todo}) => {
     const [edit, setEdit] = useState<boolean>(false)
     const [editTodo, seteditTodo] = useState<string>('edit text by typing')
+    const uppgifter = useAppSelector((state)=> state.task)
 
     const handleDone = (id:number) => {
         setlistTodos(
@@ -33,6 +35,7 @@ const ListOfTodos:React.FC<Props> = ({todos,setlistTodos,todo}) => {
           todos.map((todo) => (todo.id === id ? { ...todo, todo: editTodo } : todo))
         );
     }
+    console.log(uppgifter)
   return (
     <div style={{marginTop:'25px'}}>
         {todos.map((el,i)=>(
