@@ -3,6 +3,7 @@ import './App.css';
 import InputField from './components/InputField';
 import { Todo } from './models';
 import ListOfTodos from './components/ListOfTodos';
+
 const App:React.FC =()=> {
   const [todo, setTodo] = useState<string>("")
 const [listTodos, setlistTodos] = useState<Todo[]>([])
@@ -16,9 +17,9 @@ const handleAdd =(e: React.FormEvent)=>{
 }
   return (
     <div className="App">
-      <h1>Taskify</h1>
+      <h1 style={{textAlign:'center'}}>Veckans arbetsuppgifter</h1>
       <InputField todo={todo} setTodo={setTodo} handleAdd={handleAdd}/>
-      <ListOfTodos todos={listTodos} setlistTodos={setlistTodos}/>
+      <ListOfTodos todos={listTodos} setlistTodos={setlistTodos} todo={todo}/>
     </div>
   );
 }
